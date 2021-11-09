@@ -14,13 +14,11 @@ public class JpaMain {
 
         try {
 
-//            Member member = em.find(Member.class, 1L);
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .getResultList();
-
-            for (Member member : result) {
-                System.out.println("member = " + member.getName());
-            }
+            //영속
+            Member member = new Member();
+            member.setUsername("C");
+            member.setRoleType(RoleType.ADMIN);
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
