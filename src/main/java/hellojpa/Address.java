@@ -1,5 +1,6 @@
 package hellojpa;
 
+import java.util.Objects;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -41,5 +42,25 @@ public class Address {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+
+    // 값 타입 비교 시에는 equals를 오버라이딩 해서 구현해주어야 한다.
+    // equals의 기본은 == 비교이기 때문이다.
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Address address = (Address) o;
+        return Objects.equals(city, address.city) && Objects.equals(street,
+            address.street) && Objects.equals(zipcode, address.zipcode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(city, street, zipcode);
     }
 }
