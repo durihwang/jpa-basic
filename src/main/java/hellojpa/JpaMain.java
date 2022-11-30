@@ -15,10 +15,6 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setUsername("hwang");
-            member.setCreatedBy("kim");
-            member.setCreatedDate(LocalDateTime.now());
 
             tx.commit();
 
