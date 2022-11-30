@@ -1,6 +1,8 @@
 package hellojpa;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +30,17 @@ public class Member extends BaseEntity {
     private List<MemberProduct> memberProducts = new ArrayList<>();
 
     @Embedded
-    private Address address;
+    private Address homeAddress;
 
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+    // 값 타입 컬렉션은 생명주기가 없고 해당 entity에 의존하게 된다.
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
 
+    @ElementCollection
+    @CollectionTable(name = "ADDRESS", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    private List<Address> addressHistory = new ArrayList<>();
 
 
     public Long getId() {
