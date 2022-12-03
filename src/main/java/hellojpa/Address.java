@@ -3,6 +3,7 @@ package hellojpa;
 import java.util.Objects;
 import javax.persistence.Embeddable;
 
+// 값이 단순하지 않다면 일대다 관계를 이용하여야 한다.
 @Embeddable
 public class Address {
 
